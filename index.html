@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="myApp" ng-controller="GoogleApiCtrl">
+<html>
 	<head>
 		<meta charset='utf-8' />
 		<link rel="stylesheet" href="css/main.css"/>
@@ -14,7 +14,7 @@
 		
 	</head>
 
-	<body>
+	<body ng-app="myApp" ng-controller="GoogleApiCtrl">
 
 		<main class="container">
 
@@ -27,7 +27,7 @@
 		    <!-- <pre class="well" id="output"></pre> -->
 		  
 	    	<div ng-repeat="file in files">
-				<p>{{file.text}}</p>
+				<p>{{file.title}}</p>
 	    	</div>
 
 		</main>

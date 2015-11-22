@@ -90,14 +90,16 @@ myApp.controller('GoogleApiCtrl', ['$scope', '$window', function($scope,$window)
       request.execute(function(resp) {
         // appendPre('Files:');
 
-        console.log(resp.items[0].title);
+        console.log("items: " + resp.items[0].title);
 
         // var files = resp.items;
-        $scope.files = {
-          text: "hello"
-        };
+        $scope.files = resp.items;
 
-        console.log($scope.files);
+        // {
+        //   text: "hello"
+        // };
+
+        console.log("$scope.files: " + $scope.files);
 
         $scope.isBackendReady = true;
         // if (files && files.length > 0) {

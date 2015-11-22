@@ -6,15 +6,19 @@
 		<link rel="icon" href="img/dino.gif" type="image/gif"/>
 
 		<script src="js/app.js"></script>
+		<!-- Load google javascript library. Calls handleClientLoad() method when loaded.-->
 		<script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
 	</head>
 
 	<body>
 		<main class="container">
-			<h1>Sign in with Google!</h1>
+			<h1>Test out the Google Drive API!</h1>
 			<a href="" id="authorize-button" style="visibility: hidden"><img id="button" src="img/googleSignIn.png" alt="Sign in with Google"></a>
 			<div id="content"></div>
-		    <p>Retrieves your profile name using the Google Plus API.</p>
+		    <p>Retrieves the titles of up to ten files in your Google Drive.</p>
+
+		    <pre class="well" id="output"></pre>
+
 		</main>
 	</body>
 </html>

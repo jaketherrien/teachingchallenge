@@ -1,18 +1,21 @@
 'use strict';
 
-
-
-
-
+// initialization function after Google JS Library has finished loading
+function init() {
+  console.log("init");
+  window.initialize();
+}
 
 // create angular app
 var myApp = angular.module('myApp', []);
 
 
 // create angular controller
-myApp.controller('GoogleApiCtrl', ['$scope', function($scope) { 
+myApp.controller('GoogleApiCtrl', ['$scope', '$window', function($scope,$window) { 
 
   console.log("controller started");
+  $scope.isBackendReady = false;
+  console.log($scope.isBackendReady);
 
   var clientId = '282322657286-thqf8d9ol44fcasamt9e358p2ghigb1c.apps.googleusercontent.com'; // for OAuth2
   var apiKey = 'AIzaSyDbyRiJkjf4CU5YO6B6sc_K_iQkw-rXC74'; // for general api access
@@ -20,7 +23,9 @@ myApp.controller('GoogleApiCtrl', ['$scope', function($scope) {
   // list of scopes the user will be asked to grant access to separated by a space character (' ')
   var scopes = ['https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/drive.metadata.readonly']; 
 
-  
+  $window.initialize = function() {
+    $scope.$apply($scope.handleClientLoad);
+  };
 
   // START
   // handleClientLoad function called when Google JS library is loaded in index.html head tag
@@ -52,7 +57,7 @@ myApp.controller('GoogleApiCtrl', ['$scope', function($scope) {
       $scope.loadDriveApi(); // call method to load the Drive API
     } else {
       authorizeButton.style.visibility = '';
-      authorizeButton.onclick = handleAuthClick;
+      authorizeButton.onclick = $scope.handleAuthClick();
     }
   }
 
@@ -63,7 +68,12 @@ myApp.controller('GoogleApiCtrl', ['$scope', function($scope) {
 
   // Google Drive
   $scope.loadDriveApi = function(){
-    gapi.client.load('drive', 'v2', $scope.listFiles); // load the drive api, version 2, then call the list files function
+    gapi.client.load('drive', 'v2', function() {
+     console.log($scope.isBackendReady);
+    
+    console.log($scope.isBackendReady);
+    $scope.listFiles(); // load the drive api, version 2, then call the list files function
+    })
   }
 
   $scope.listFiles = function() {
@@ -83,9 +93,13 @@ myApp.controller('GoogleApiCtrl', ['$scope', function($scope) {
         console.log(resp.items[0].title);
 
         // var files = resp.items;
-        $scope.files = resp.items[0];
+        $scope.files = {
+          text: "hello"
+        };
 
         console.log($scope.files);
+
+        $scope.isBackendReady = true;
         // if (files && files.length > 0) {
         //   for (var i = 0; i < files.length; i++) {
         //     var file = files[i];

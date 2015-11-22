@@ -8,7 +8,6 @@ var scopes = 'https://www.googleapis.com/auth/plus.me'; // which
 // START
 // handleClientLoad function called when Google JS library is loaded in index.html head tag
 function handleClientLoad() { 
-  console.log('loaded');
   gapi.client.setApiKey(apiKey); // set the apuKey
   window.setTimeout(checkAuth,1); // calls the checkAuth() method after 1 millisecond
 }
@@ -33,7 +32,7 @@ function handleAuthClick(event) {
   return false;
 }
 
- // Load the API and make an API call.  Display the results on the screen.
+ //Load the API and make an API call.  Display the results on the screen.
 function makeApiCall() {
   gapi.client.load('plus', 'v1', function() {
     var request = gapi.client.plus.people.get({

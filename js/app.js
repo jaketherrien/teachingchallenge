@@ -4,7 +4,6 @@ var clientId = '282322657286-thqf8d9ol44fcasamt9e358p2ghigb1c.apps.googleusercon
 var apiKey = 'AIzaSyDbyRiJkjf4CU5YO6B6sc_K_iQkw-rXC74'; // for general api access
 var scopes = 'https://www.googleapis.com/auth/plus.me';
 
-
 // handleClientLoad function called when Google JS library is loaded in index.html
 function handleClientLoad() { 
   gapi.client.setApiKey(apiKey);
@@ -31,7 +30,7 @@ function handleAuthClick(event) {
   return false;
 }
 
- // Load the API and make an API call.  Display the results on the screen.
+ //Load the API and make an API call.  Display the results on the screen.
 function makeApiCall() {
   gapi.client.load('plus', 'v1', function() {
     var request = gapi.client.plus.people.get({

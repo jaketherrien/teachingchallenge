@@ -3,10 +3,10 @@
 
 var clientId = '282322657286-thqf8d9ol44fcasamt9e358p2ghigb1c.apps.googleusercontent.com'; // for OAuth2
 var apiKey = 'AIzaSyDbyRiJkjf4CU5YO6B6sc_K_iQkw-rXC74'; // for general api access
-var scopes = 'https://www.googleapis.com/auth/plus.me';
+var scopes = 'https://www.googleapis.com/auth/plus.me'; // which 
 
 // START
-// handleClientLoad function called when Google JS library is loaded in index.html
+// handleClientLoad function called when Google JS library is loaded in index.html head tag
 function handleClientLoad() { 
   console.log('loaded');
   gapi.client.setApiKey(apiKey); // set the apuKey

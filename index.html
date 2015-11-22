@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="myApp" ng-controller="GoogleApiCtrl">
+<html ng-app="myApp">
 	<head>
 		<meta charset='utf-8' />
 		<link rel="stylesheet" href="css/main.css"/>
@@ -16,23 +16,19 @@
 
 	<body>
 
-		<main class="container">
-
-			<button ng-click="handleClientLoad()">Start</button>
-
+		<main class="container"  ng-controller="GoogleApiCtrl">
 			<h1>Test out the Google Drive API!</h1>
-			<a href="" id="authorize-button" style="visibility: hidden"><img id="button" src="img/googleSignIn.png" alt="Sign in with Google"></a>
+			<button ng-click="handleClientLoad()" id="authorize-button" style="visibility: hidden"><img id="button" src="img/googleSignIn.png" alt="Sign in with Google"></button>
 			<!-- <div id="content"></div> -->
 		    <p>Retrieves the titles of up to ten files in your Google Drive.</p>
 		    <!-- <pre class="well" id="output"></pre> -->
 
 		    <div ng-repeat="file in files">
-		    	Hello
-		    	<p>{{file}}</p>
-
-
+		    	Hello, can you hear me?
+		    	<ul>
+		    		<li>{{file}}</li>
+		    	</ul>
 		    </div>
-
 
 		</main>
 	</body>

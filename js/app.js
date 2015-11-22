@@ -1,14 +1,16 @@
 'use strict';
 
+
 var clientId = '282322657286-thqf8d9ol44fcasamt9e358p2ghigb1c.apps.googleusercontent.com'; // for OAuth2
 var apiKey = 'AIzaSyDbyRiJkjf4CU5YO6B6sc_K_iQkw-rXC74'; // for general api access
 var scopes = 'https://www.googleapis.com/auth/plus.me';
 
-
+// START
 // handleClientLoad function called when Google JS library is loaded in index.html
 function handleClientLoad() { 
-  gapi.client.setApiKey(apiKey);
-  window.setTimeout(checkAuth,1);
+  console.log('loaded');
+  gapi.client.setApiKey(apiKey); // set the apuKey
+  window.setTimeout(checkAuth,1); // calls the checkAuth() method after 1 millisecond
 }
 
 function checkAuth() {

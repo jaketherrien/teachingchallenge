@@ -1,23 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="myApp" ng-controller="GoogleApiCtrl">
 	<head>
 		<meta charset='utf-8' />
 		<link rel="stylesheet" href="css/main.css"/>
 		<link rel="icon" href="img/dino.gif" type="image/gif"/>
 
+		<!-- Load Angular Library -->
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+		<!-- Load Google Javascript library. Calls handleClientLoad() method when loaded.-->
+		<script src="https://apis.google.com/js/client.js"></script> <!-- ?onload=handleClientLoad -->
+		<!-- Load our main Javascript app -->
 		<script src="js/app.js"></script>
-		<!-- Load google javascript library. Calls handleClientLoad() method when loaded.-->
-		<script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
+		
 	</head>
 
 	<body>
+
 		<main class="container">
+
+			<button ng-click="handleClientLoad()">Start</button>
+
 			<h1>Test out the Google Drive API!</h1>
 			<a href="" id="authorize-button" style="visibility: hidden"><img id="button" src="img/googleSignIn.png" alt="Sign in with Google"></a>
-			<div id="content"></div>
+			<!-- <div id="content"></div> -->
 		    <p>Retrieves the titles of up to ten files in your Google Drive.</p>
+		    <!-- <pre class="well" id="output"></pre> -->
 
-		    <pre class="well" id="output"></pre>
+		    <div ng-repeat="file in files">
+		    	Hello
+		    	<p>{{file}}</p>
+
+
+		    </div>
+
 
 		</main>
 	</body>

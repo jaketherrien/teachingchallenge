@@ -1,88 +1,120 @@
 'use strict';
 
 
-var clientId = '282322657286-thqf8d9ol44fcasamt9e358p2ghigb1c.apps.googleusercontent.com'; // for OAuth2
-var apiKey = 'AIzaSyDbyRiJkjf4CU5YO6B6sc_K_iQkw-rXC74'; // for general api access
 
-// list of scopes the user will be asked to grant access to separated by a space character (' ')
-var scopes = ['https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/drive.metadata.readonly']; 
 
-// START
-// handleClientLoad function called when Google JS library is loaded in index.html head tag
-function handleClientLoad() { 
-  console.log("handleClientLoad() called");
-  gapi.client.setApiKey(apiKey); // set the apuKey
-  window.setTimeout(checkAuth,1); // calls the checkAuth() method after 1 millisecond
-}
 
-function checkAuth() {
-  console.log("checkAuth() called");
-  gapi.auth.authorize(
-    {
-      client_id: clientId, 
-      scope: scopes.join(' '), // join the list of scopes separated by a space character (' ')
-      immediate: true
-    }, handleAuthResult);
-}
 
-function handleAuthResult(authResult) {
-  console.log("handleAuthResult() called");
-  var authorizeButton = document.getElementById('authorize-button');
+// create angular app
+var myApp = angular.module('myApp', []);
 
-  // if the user has already authorized API access proceed to the API call, otherwise display button to authorize the app
-  if (authResult && !authResult.error) {
-    authorizeButton.style.visibility = 'hidden';
-    loadDriveApi(); // call method to load the Drive API
-  } else {
-    authorizeButton.style.visibility = '';
-    authorizeButton.onclick = handleAuthClick;
+
+// create angular controller
+myApp.controller('GoogleApiCtrl', ['$scope', function($scope) { 
+
+  console.log("controller started");
+
+  var clientId = '282322657286-thqf8d9ol44fcasamt9e358p2ghigb1c.apps.googleusercontent.com'; // for OAuth2
+  var apiKey = 'AIzaSyDbyRiJkjf4CU5YO6B6sc_K_iQkw-rXC74'; // for general api access
+
+  // list of scopes the user will be asked to grant access to separated by a space character (' ')
+  var scopes = ['https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/drive.metadata.readonly']; 
+
+  
+
+  // START
+  // handleClientLoad function called when Google JS library is loaded in index.html head tag
+  $scope.handleClientLoad = function() { 
+    console.log("handleClientLoad() called");
+    gapi.client.setApiKey(apiKey); // set the apuKey
+    window.setTimeout($scope.checkAuth,1); // calls the checkAuth() method after 1 millisecond
   }
-}
 
-function handleAuthClick(event) {
-  gapi.auth.authorize({client_id: clientId, scope: scopes, immediate: false}, handleAuthResult);
-  return false;
-}
+  // $scope.handleClientLoad();
 
-// Google Drive
-function loadDriveApi(){
-  gapi.client.load('drive', 'v2', listFiles); // load the drive api, version 2, then call the list files function
-}
-
-function listFiles() {
-  console.log("listFiles() called");
-  // request up to ten Drive files, builds a request object
-  var request = gapi.client.drive.files.list(
+  $scope.checkAuth = function() {
+    console.log("checkAuth() called");
+    gapi.auth.authorize(
       {
-        'maxResults': 10
-      }
-    );
+        client_id: clientId, 
+        scope: scopes.join(' '), // join the list of scopes separated by a space character (' ')
+        immediate: true
+      }, $scope.handleAuthResult);
+  }
 
-    request.execute(function(resp) {
-      appendPre('Files:');
-      var files = resp.items;
-      if (files && files.length > 0) {
-        for (var i = 0; i < files.length; i++) {
-          var file = files[i];
-          appendPre(file.title + ' (' + file.id + ')');
+  $scope.handleAuthResult = function(authResult) {
+    console.log("handleAuthResult() called");
+    var authorizeButton = document.getElementById('authorize-button');
+
+    // if the user has already authorized API access proceed to the API call, otherwise display button to authorize the app
+    if (authResult && !authResult.error) {
+      authorizeButton.style.visibility = 'hidden';
+      $scope.loadDriveApi(); // call method to load the Drive API
+    } else {
+      authorizeButton.style.visibility = '';
+      authorizeButton.onclick = handleAuthClick;
+    }
+  }
+
+  $scope.handleAuthClick = function(event) {
+    gapi.auth.authorize({client_id: clientId, scope: scopes, immediate: false}, $scope.handleAuthResult);
+    return false;
+  }
+
+  // Google Drive
+  $scope.loadDriveApi = function(){
+    gapi.client.load('drive', 'v2', $scope.listFiles); // load the drive api, version 2, then call the list files function
+  }
+
+  $scope.listFiles = function() {
+    console.log("listFiles() called");
+    // request up to ten Drive files, builds a request object
+    var request = gapi.client.drive.files.list(
+        {
+          'maxResults': 10
         }
-      } else {
-        appendPre('No files found.');
-      }
-    });
-}
+      );
 
-/**
-* Append a pre element to the body containing the given message
-* as its text node.
-*
-* @param {string} message Text to be placed in pre element.
-*/
-function appendPre(message) {
-  var pre = document.getElementById('output');
-  var textContent = document.createTextNode(message + '\n');
-  pre.appendChild(textContent);
-}
+      // console.log(request);
+
+      request.execute(function(resp) {
+        // appendPre('Files:');
+
+        console.log(resp.items[0].title);
+
+        // var files = resp.items;
+        $scope.files = resp.items[0];
+
+        console.log($scope.files);
+        // if (files && files.length > 0) {
+        //   for (var i = 0; i < files.length; i++) {
+        //     var file = files[i];
+        //     appendPre(file.title + ' (' + file.id + ')');
+        //   }
+        // } else {
+        //   appendPre('No files found.');
+        // }
+      });
+  }
+
+  /**
+  * Append a pre element to the body containing the given message
+  * as its text node.
+  *
+  * @param {string} message Text to be placed in pre element.
+  */
+  // function appendPre(message) {
+  //   var pre = document.getElementById('output');
+  //   var textContent = document.createTextNode(message + '\n');
+  //   pre.appendChild(textContent);
+  // }
+
+
+
+}]);
+
+
+
 
 
 

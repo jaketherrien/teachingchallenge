@@ -1,8 +1,9 @@
 'use strict';
 
-// initialization function after Google JS Library has finished loading
+// initialization function called after Google JS Library has finished loading
+// used to 
 function init() {
-  console.log("init");
+  // call the initialize function in $window
   window.initialize();
 }
 
@@ -57,7 +58,7 @@ myApp.controller('GoogleApiCtrl', ['$scope', '$window', function($scope,$window)
       $scope.loadDriveApi(); // call method to load the Drive API
     } else {
       authorizeButton.style.visibility = '';
-      authorizeButton.onclick = $scope.handleAuthClick();
+      // authorizeButton.onclick = $scope.handleAuthClick();
     }
   }
 
@@ -99,7 +100,7 @@ myApp.controller('GoogleApiCtrl', ['$scope', '$window', function($scope,$window)
         //   text: "hello"
         // };
 
-        console.log("$scope.files: " + $scope.files);
+        console.log($scope.files);
 
         $scope.isBackendReady = true;
         // if (files && files.length > 0) {
@@ -151,3 +152,4 @@ myApp.controller('GoogleApiCtrl', ['$scope', '$window', function($scope,$window)
 //     });
 //   });
 // }
+

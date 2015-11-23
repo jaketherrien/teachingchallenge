@@ -11,6 +11,6 @@ Authors:
 
 Brittney Hoy and J. Benjamin Leeds
 
-Tutorial Video URL:
+Tutorial Video URL: https://www.youtube.com/watch?v=Zi2h4eAd728&feature=youtu.be
 
 

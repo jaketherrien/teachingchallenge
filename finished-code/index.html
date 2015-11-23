@@ -38,15 +38,13 @@
 				
 			</div>
 
-				
-
-			
-
 			<!-- Display API Call Results -->
 		    <div ng-show="isBackendReady">
 		    	<div class="row well" ng-repeat="file in files | filter:searchQuery">
 					<img class="iconLink col-md-2" ng-src="{{file.iconLink}}">
-					<a ng-href="{{file.alternateLink}}"><p class="col-md-5">{{file.title}}</p></a>
+					<a ng-href="{{file.alternateLink}}">
+						<p class="col-md-5">{{file.title}}</p>
+					</a>
 					<p class="col-md-5">Owner: {{file.owners[0].displayName}}</p>
 	    		</div>
 		    </div>

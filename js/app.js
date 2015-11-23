@@ -151,4 +151,3 @@ myApp.controller('GoogleApiCtrl', ['$scope', '$window', function($scope,$window)
 //     });
 //   });
 // }
-

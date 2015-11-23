@@ -57,7 +57,7 @@ myApp.controller('GoogleApiCtrl', ['$scope', '$window', function($scope,$window)
       $scope.loadDriveApi(); // call method to load the Drive API
     } else {
       authorizeButton.style.visibility = '';
-      authorizeButton.onclick = $scope.handleAuthClick();
+      // authorizeButton.onclick = $scope.handleAuthClick();
     }
   }
 
@@ -99,7 +99,7 @@ myApp.controller('GoogleApiCtrl', ['$scope', '$window', function($scope,$window)
         //   text: "hello"
         // };
 
-        console.log("$scope.files: " + $scope.files);
+        console.log($scope.files);
 
         $scope.isBackendReady = true;
         // if (files && files.length > 0) {

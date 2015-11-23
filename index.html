@@ -14,22 +14,42 @@
 		
 	</head>
 
-	<body ng-app="myApp" ng-controller="GoogleApiCtrl">
+	<body class="container" ng-app="myApp" ng-controller="GoogleApiCtrl">
 
-		<main class="container">
+			<div class="row">
 
-			<button ng-click="handleClientLoad()">Start</button>
+				<h1>Using the Google API Client Library for JavaScript!</h1>
+				<ul>
+					<li>Authenticates with a user's Google account to access private data.</li>
+					<li>Retrieves a list of up to ten files from a user's Google Drive.</li>
+				</ul>
 
-			<h1>Test out the Google Drive API!</h1>
-			<a href="" id="authorize-button" style="visibility: hidden"><img id="button" src="img/googleSignIn.png" alt="Sign in with Google"></a>
-			<!-- <div id="content"></div> -->
-		    <p>Retrieves the titles of up to ten files in your Google Drive.</p>
-		    <!-- <pre class="well" id="output"></pre> -->
-		  
-	    	<div ng-repeat="file in files">
-				<p>{{file.title}}</p>
-	    	</div>
+			</div>
+			<div class="row">
 
-		</main>
+				<button class="btn btn-primary" ng-click="handleClientLoad()">Retrieve Files</button>
+
+				<a href="" id="authorize-button" style="visibility: hidden" ng-click="handleAuthClick()"><img id="button" src="img/googleSignIn.png" alt="Sign in with Google"></a>
+
+				<div id="search" class="form-group form-inline pull-right">
+					<i class="fa fa-search"></i>
+					<input type="text" name="query" id="query" class="form-control" ng-model="searchQuery">
+				</div>
+				
+			</div>
+
+				
+
+			
+
+			<!-- Display API Call Results -->
+		    <div ng-show="isBackendReady">
+		    	<div class="row well" ng-repeat="file in files | filter:searchQuery">
+					<img class="iconLink col-md-2" ng-src="{{file.iconLink}}">
+					<a ng-href="{{file.alternateLink}}"><p class="col-md-5">{{file.title}}</p></a>
+					<p class="col-md-5">Owner: {{file.owners[0].displayName}}</p>
+	    		</div>
+		    </div>
+
 	</body>
 </html>

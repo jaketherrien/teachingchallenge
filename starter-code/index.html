@@ -25,28 +25,27 @@
 
 			</div>
 			<div class="row">
-
 				<button class="btn btn-primary" ng-click="handleClientLoad()">Retrieve Files</button>
-
+				
 				<a href="" id="authorize-button" style="visibility: hidden" ng-click="handleAuthClick()">
 					<img id="button" src="img/googleSignIn.png" alt="Sign in with Google">
 				</a>
-
+				
 				<div id="search" class="form-group form-inline pull-right">
 					<i class="fa fa-search"></i>
 					<input type="text" name="query" id="query" class="form-control" ng-model="searchQuery">
 				</div>
-				
 			</div>
 
 			<!-- Display API Call Results -->
 		    <div ng-show="isBackendReady">
 		    	<div class="row well" ng-repeat="file in files | filter:searchQuery">
 					<img class="iconLink col-md-2" ng-src="{{file.iconLink}}">
-					<a ng-href="{{file.alternateLink}}"><p class="col-md-5">{{file.title}}</p></a>
+					<a ng-href="{{file.alternateLink}}">
+						<p class="col-md-5">{{file.title}}</p>
+					</a>
 					<p class="col-md-5">Owner: {{file.owners[0].displayName}}</p>
 	    		</div>
 		    </div>
-
 	</body>
 </html>

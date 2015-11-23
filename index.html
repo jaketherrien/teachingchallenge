@@ -26,8 +26,10 @@
 		    <p>Retrieves the titles of up to ten files in your Google Drive.</p>
 		    <!-- <pre class="well" id="output"></pre> -->
 		  
-	    	<div ng-repeat="file in files">
-				<p>{{file.title}}</p>
+	    	<div>
+	    		<ul>
+					<li ng-repeat="file in files">{{file.title}}</li>
+				</ul>
 	    	</div>
 
 		</main>
